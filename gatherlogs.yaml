@@ -1,0 +1,17 @@
+- hosts: '{{ hosts }}'
+  become: yes
+  become_user: root
+
+  tasks:
+  - name: tarball the logs
+    shell: tar -czf /tmp/uab_{{ inventory_hostname }}_{{ ticketnum }}.tgz proserver/
+    args:
+      chdir: /var/log
+
+  - name: fetch the log archive
+    fetch: src=/tmp/uab_{{ inventory_hostname }}_{{ ticketnum }}.tgz dest=~/projects/crashplan-ops/ticket-{{ ticketnum }}/ flat=yes
+
+  - name: remove the temp file
+    shell: rm /tmp/uab_{{ inventory_hostname }}_{{ ticketnum }}.tgz
+    args:
+      removes: /tmp/uab_{{ inventory_hostname }}_{{ ticketnum }}.tgz
