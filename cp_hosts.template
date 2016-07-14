@@ -1,0 +1,3 @@
+[crashplan-prod]
+master ansible_host=<crashplan master>  ansible_user=<user on master>
+store  ansible_host=<crashplan storage> ansible_user=<user on storage>
