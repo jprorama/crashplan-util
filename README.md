@@ -14,3 +14,10 @@ access the storage server.
 The cp_host.template can be used to map to the local infrastructure.  If you treat
 your master as the cluster entry point you can use a [jump host configuration](https://wiki.gentoo.org/wiki/SSH_jump_host)
 to allow Ansible to work though that host against your storage server(s).
+
+The get_controller_log playbook gets the current controller log from the storage server.
+This currently assumes the storage server is a Dell server with the OpenManage tools installed.
+
+```sh
+ansible-playbook -i cp_hosts get_controller_log.yaml
+```
