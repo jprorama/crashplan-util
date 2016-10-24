@@ -1,0 +1,17 @@
+- hosts: 'store'
+  become: yes
+  become_user: root
+
+  tasks:
+  - name: generate controller log
+    shell: /opt/dell/srvadmin/bin/omconfig storage controller action=exportlog controller=0
+    args:
+      chdir: /var/log
+
+  - name: fetch the controller log to current dir
+    fetch: src=/var/log/lsi_1024.log dest=./ flat=yes
+
+  - name: remove the controller log from the server
+    shell: rm /var/log/lsi_1024.log
+    args:
+      removes: /var/log/lsi_1024.log
